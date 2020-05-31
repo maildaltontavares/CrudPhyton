@@ -1,0 +1,18 @@
+
+{%extends 'base.html' %}
+
+{%block title %} Novidade Anual {% endblock %}
+
+{%block content %}
+<h1> Novidade Anual , Base</h1>
+
+{%for Novidade in arquivo_list%}
+
+<h1> {{Novidade.author}}</h1>
+<h1> {{Novidade.title}}</h1>
+<p> {{Novidade.description}}</p>
+<p> {{Novidade.edition}}</p>
+<h1>{{Novidade.pub_date}}</h1>
+
+{%endfor%}
+{% endblock %}

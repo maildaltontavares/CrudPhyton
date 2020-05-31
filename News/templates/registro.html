@@ -1,0 +1,79 @@
+
+{%extends 'base.html' %}
+{% load bootstrap %}
+{%block title %} Registro {% endblock %}
+
+{%block content %}
+
+<form  method="post">
+    {%csrf_token %}
+  <div class = 'container'>
+
+      {% if messages %}
+          <ul class="message">
+              {%for msg in messages %}
+                    <li>
+                        <div class="alert alert-{{msg.level_tag}}" role="alert">
+                            {{msg.message}}
+                        </div>
+                    </li>
+              {% endfor%}
+          </ul>
+      {%endif%}
+
+      <h1 class="p-3 mb-2 bg-light text-dark"> Cadastro de Usuarios</h1>
+
+
+      <div class="form-group">
+<!--        <label>Username</label>-->
+<!--        <input type="text" class="form-control"  placeholder="Digite username">-->
+          {{form.username|bootstrap}}
+      </div>
+
+<!--      <div class="form-group">-->
+<!--&lt;!&ndash;        <label>Password</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="password" class="form-control"  placeholder="Senha">&ndash;&gt;-->
+<!--          {{form.password|bootstrap}}-->
+<!--      </div>-->
+
+      <div class="row">
+        <div class="col-3">{{form.password|bootstrap}}</div>
+      </div>
+
+      <div class="form-group">
+<!--        <label for="exampleFormControlInput1">Email</label>-->
+<!--        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">-->
+          {{form.email|bootstrap}}
+      </div>
+
+<!--      <div class="form-group">-->
+<!--&lt;!&ndash;        <label>Fone</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="text" class="form-control"  placeholder="Digite telefone">&ndash;&gt;-->
+<!--          {{form.tel|bootstrap}}-->
+<!--      </div>-->
+
+      <div class="row">
+        <div class="col-3">{{form.tel|bootstrap}}</div>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Gravar">
+        <td><BUTTON><a href="{%url 'usuario'%}">Voltar</a></BUTTON> </td>
+        {% if registroA %}
+            <td><BUTTON><a href="{%url 'excUser'  registroA.id  %}">Deletar</a></BUTTON> </td>
+        {% endif %}
+
+      </div>
+
+
+
+
+
+  </div>
+</form>
+
+
+{% endblock %}
+
+<!--</body>-->
+<!--</html>-->

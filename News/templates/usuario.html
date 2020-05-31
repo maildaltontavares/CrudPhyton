@@ -1,0 +1,161 @@
+{%extends 'base.html' %}
+
+{%block title %} Usuarios {% endblock %}
+
+{%block content %}
+<h1 class="p-3 mb-2 bg-light text-dark">Usuarios</h1>
+
+<!--<h1> {{object.author}}</h1>-->
+<!--<h1> {{object.title}}</h1>-->
+<!--<h1> {{object.description}}</h1>-->
+<!--<h1> {{object.edition}}</h1>-->
+<div class="row">
+  <div class="col-12">
+
+    <form class="form-inline">
+      <div class="form-group mx-sm-3 mb-2">
+          <label for="username">Username ></label>
+          {%if pesqUsername  %}
+              <input type="text" class="form-control"  name="nome" placeholder="Pesquise por username" value={{pesqUsername}}>
+          {%else %}
+              <input type="text" class="form-control"  name="nome" placeholder="Pesquise por username">
+          {%endif%}
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+          <label for="email">Email1 ></label>
+          {%if pesqEmail  %}
+              <input type="text" class="form-control"  name="email" placeholder="Pesquise por email" value={{pesqEmail}}>
+          {%else %}
+              <input type="text" class="form-control" id="email" name="email" placeholder="Pesquise por email" >
+          {%endif%}
+      </div>
+      <button type="submit" class="btn btn-primary mb-2"> Pesquisar </button>
+      <div class="form-group mx-sm-3 mb-2">
+         <a href="?nome=&email=" class="btn btn-light">Listar Todos</a>
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+         <a href="{%url 'add'%}" class="btn btn-primary">Novo Usuario</a>
+      </div>
+
+
+<!--      <button type="submit" class="btn btn-primary mb-2">Limpar Pesquisar</button>-->
+
+
+
+    </form>
+
+
+
+  </div>
+</div>
+
+<h1>  </h1>
+
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Username</th>
+      <th scope="col">Password</th>
+      <th scope="col">Email</th>
+      <th scope="col">Fone</th>
+      <th scope="col-2">Acao</th>
+<!--      <th scope="col">Acao</th>-->
+    </tr>
+  </thead>
+  <tbody>
+
+
+    {%for Novidade in arquivo_list%}
+
+
+    <!--<h1> {{Novidade.username}}</h1>-->
+    <!--<h1> {{Novidade.password}}</h1>-->
+    <!--<p> {{Novidade.email}}</p>-->
+    <!--<p> {{Novidade.tel}}</p>-->
+
+        <tr>
+          <th scope="row">{{Novidade.id}}</th>
+          <td><a href="{%url 'altUser'  Novidade.id  %}">{{Novidade.username}}</a> </td>
+
+          <td>{{Novidade.password}}</td>
+          <td>{{Novidade.email}}</td>
+          <td>{{Novidade.tel}}</td>
+
+          <td><a href="{%url 'altUser'  Novidade.id  %}">Alterar</a> </td>
+          <td><a href="{%url 'excUser'  Novidade.id  %}">Excluir</a> </td>
+
+
+        </tr>
+
+
+    {%endfor%}
+
+  </tbody>
+</table>
+
+
+
+<div class="row">
+  <div class="col-12">
+
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if arquivo_list.has_previous %}
+<!--                    <a href="?page={{ arquivo_list.previous_page_number }}">anterior</a>-->
+
+                    {%if pesqEmail and pesqUsername %}
+                          <a href="?page={{ arquivo_list.previous_page_number }}&email={{pesqEmail}}&nome={{pesqUsername}}" class="btn btn-light"> << Anterior </a>
+                    {%else%}
+                          {%if pesqEmail or pesqUsername%}
+                              {%if pesqEmail %}
+                                  <a href="?page={{ arquivo_list.previous_page_number }}&email={{pesqEmail}}&nome=" class="btn btn-light"> << Anterior </a>
+                              {%else %}
+                                  <a href="?page={{ arquivo_list.previous_page_number }}&email=&nome={{pesqUsername}}" class="btn btn-light"> << Anterior </a>
+                              {%endif%}
+                          {%else %}
+                                <a href="?page={{ arquivo_list.previous_page_number }}&email=&nome=" class="btn btn-light"> << Anterior </a>
+                          {%endif%}
+                    {%endif%}
+
+                {% endif %}
+
+                <span class="current">
+                    Página {{ arquivo_list.number }} de {{ arquivo_list.paginator.num_pages }}.
+                </span>
+
+                {% if arquivo_list.has_next %}
+<!--                    <a href="?page={{ arquivo_list.next_page_number }}"> Próxima >></a>-->
+                    {%if pesqEmail and pesqUsername %}
+                          <a href="?page={{ arquivo_list.next_page_number }}&email={{pesqEmail}}&nome={{pesqUsername}}" class="btn btn-light">  Próxima >></a>
+                    {%else%}
+                          {%if pesqEmail or pesqUsername%}
+                              {%if pesqEmail %}
+                                  <a href="?page={{ arquivo_list.next_page_number }}&email={{pesqEmail}}&nome=" class="btn btn-light">  Próxima >></a>
+                              {%else %}
+                                  <a href="?page={{ arquivo_list.next_page_number }}&email=&nome={{pesqUsername}}" class="btn btn-light">  Próxima >></a>
+                              {%endif%}
+                          {%else %}
+                                <a href="?page={{ arquivo_list.next_page_number }}&email=&nome=" class="btn btn-light">  Próxima >></a>
+                          {%endif%}
+                    {%endif%}
+
+
+
+
+                {% endif %}
+            </span>
+        </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

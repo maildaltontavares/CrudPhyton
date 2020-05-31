@@ -1,0 +1,30 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>django2.1</title>-->
+<!--</head>-->
+<!--<body>-->
+{%extends 'base.html' %}
+
+{%block title %} home {% endblock %}
+
+{%block content %}
+<h1> Home page, pagina inicial vinda do Base</h1>
+{{text}}
+{{nomes}}
+
+{% for nome in nomes %}
+    <ul>
+        <li>{{nome}}</li>
+
+    </ul>
+{% endfor %}
+
+  <button type="button" class="btn btn-secondary">Left</button>
+  <button type="button" class="btn btn-secondary">Middle</button>
+  <button type="button" class="btn btn-secondary">Right</button>
+
+{% endblock %}
+<!--</body>-->
+<!--</html>-->
